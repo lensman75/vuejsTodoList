@@ -36,14 +36,23 @@
               name: this.item,
             };
             this.items.push(item);
+            localStorage.setItem('items', JSON.stringify(this.items));
             this.item = '';
           },
+
           removeItem: function (item) {
             let newItems = this.items.filter(function (i) {
               return item.id !== i.id;
             });
             this.items = newItems;
+
+            localStorage.setItem('items', JSON.stringify(this.items));
           },
+        },
+        mounted() {
+          console.log('hello');
+
+          this.items = JSON.parse(localStorage.getItem('items')) || [];
         },
       });
     </script>
